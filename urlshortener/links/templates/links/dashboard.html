@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+</head>
+<body>
+    <h1>Ваши сокращённые ссылки</h1>
+
+    <!-- Кнопка для создания новой ссылки -->
+    <a href="{% url 'create_link' %}" class="btn btn-primary">Создать новую ссылку</a>
+
+    <table>
+        <tr>
+            <th>Оригинальная ссылка</th>
+            <th>Короткая ссылка</th>
+            <th>Дата создания</th>
+            <th>Дата последнего обращения</th>
+        </tr>
+        {% for link in links %}
+        <tr>
+            <td>{{ link.original_url }}</td>
+            <td><a href="{{ link.short_id }}">{{ link.short_id }}</a></td>
+            <td>{{ link.created_at }}</td>
+            <td>{{ link.last_accessed }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">У вас нет сокращённых ссылок</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
